@@ -1,0 +1,420 @@
+/* Заповедные территории Беларуси — полевой атлас, не журнал и не лендинг */
+
+:root {
+  --peat: #1c2a1f;
+  --peat-deep: #121a14;
+  --moss: #4a6b3e;
+  --moss-bright: #6b8f4e;
+  --lichen: #c4d4a8;
+  --paper: #f3ead7;
+  --paper-edge: #e4d8bc;
+  --ink: #1a1814;
+  --muted: #5c574c;
+  --rule: #cbbd9a;
+  --rust: #8b4a2a;
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-body: "Figtree", "Segoe UI", sans-serif;
+  --font-meta: "IBM Plex Mono", "Consolas", monospace;
+  --rail: 15.5rem;
+  --sheet: 46rem;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--peat-deep);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--moss);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  color: var(--rust);
+}
+
+.skip {
+  position: absolute;
+  left: 0.75rem;
+  top: -3rem;
+  background: var(--lichen);
+  color: var(--peat);
+  padding: 0.4rem 0.7rem;
+  z-index: 20;
+}
+
+.skip:focus {
+  top: 0.75rem;
+}
+
+.mast {
+  display: none;
+}
+
+.frame {
+  display: grid;
+  grid-template-columns: var(--rail) minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.rail {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: auto;
+  background: var(--peat);
+  color: var(--lichen);
+  padding: 1.6rem 1.2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.rail-brand {
+  color: var(--paper);
+  text-decoration: none;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.rail-brand:hover {
+  color: var(--lichen);
+}
+
+.rail-mark {
+  display: inline-flex;
+  width: 2.4rem;
+  height: 2.4rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--lichen);
+  font-family: var(--font-meta);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+.rail-name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.rail-kicker {
+  font-family: var(--font-meta);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lichen);
+  opacity: 0.8;
+}
+
+.rail nav {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.rail nav a {
+  color: var(--lichen);
+  text-decoration: none;
+  padding: 0.38rem 0;
+  border-top: 1px solid rgba(196, 212, 168, 0.18);
+  font-size: 0.95rem;
+}
+
+.rail nav a:hover,
+.rail nav a.is-on {
+  color: var(--paper);
+}
+
+.rail-note {
+  margin-top: auto;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: rgba(196, 212, 168, 0.72);
+}
+
+.sheet {
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 23px,
+      rgba(139, 74, 42, 0.03) 24px
+    ),
+    var(--paper);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.sheet-inner {
+  width: min(calc(100% - 3rem), var(--sheet));
+  margin: 0 auto;
+  padding: 2.2rem 0 3.5rem;
+  flex: 1;
+}
+
+.trail {
+  font-family: var(--font-meta);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin-bottom: 1.6rem;
+}
+
+.trail a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.trail a:hover {
+  color: var(--rust);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 520;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  color: var(--peat-deep);
+  margin: 0 0 0.7em;
+}
+
+h1 {
+  font-size: clamp(2rem, 4.4vw, 3.15rem);
+  font-variation-settings: "SOFT" 40, "WONK" 0.4;
+  max-width: 18ch;
+}
+
+h2 {
+  font-size: 1.55rem;
+  margin-top: 2rem;
+}
+
+h3 {
+  font-size: 1.18rem;
+  margin-top: 1.4rem;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+.lede {
+  font-size: 1.18rem;
+  max-width: 38rem;
+}
+
+.meta-line {
+  font-family: var(--font-meta);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin: 0 0 1.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1.2rem;
+}
+
+.index-list {
+  list-style: none;
+  margin: 2.4rem 0 0;
+  padding: 0;
+  border-top: 2px solid var(--peat);
+}
+
+.index-list a {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr auto;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 1.05rem 0;
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+  color: inherit;
+}
+
+.index-list a:hover .index-title {
+  color: var(--rust);
+}
+
+.index-num {
+  font-family: var(--font-meta);
+  font-size: 0.75rem;
+  color: var(--moss);
+}
+
+.index-title {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  line-height: 1.15;
+}
+
+.index-hint {
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.ledger {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin: 1rem 0 1.6rem;
+}
+
+.ledger caption {
+  text-align: left;
+  font-family: var(--font-meta);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.ledger th,
+.ledger td {
+  text-align: left;
+  padding: 0.55rem 0.45rem 0.55rem 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+.ledger th {
+  font-family: var(--font-meta);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--muted);
+  border-bottom: 2px solid var(--peat);
+}
+
+.cluster {
+  display: grid;
+  gap: 0.7rem;
+  margin: 1.2rem 0 1.8rem;
+}
+
+.cluster a {
+  display: block;
+  padding: 0.85rem 0;
+  border-bottom: 1px dashed var(--rule);
+  text-decoration: none;
+  color: inherit;
+}
+
+.cluster a strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 520;
+}
+
+.cluster a span {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.help-block {
+  margin-top: 2.4rem;
+  padding-top: 1.4rem;
+  border-top: 2px solid var(--peat);
+}
+
+.help-block h2 {
+  margin-top: 0;
+}
+
+.site-end {
+  border-top: 1px solid var(--rule);
+  padding: 1.1rem 0 2rem;
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+
+.site-end a {
+  color: var(--muted);
+}
+
+.contents-grid {
+  display: grid;
+  gap: 0;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 920px) {
+  .mast {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    position: sticky;
+    top: 0;
+    z-index: 8;
+    background: var(--peat);
+    color: var(--paper);
+    padding: 0.7rem 1rem;
+  }
+
+  .mast-toggle {
+    background: transparent;
+    color: var(--lichen);
+    border: 1px solid var(--lichen);
+    font-family: var(--font-meta);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.5rem;
+  }
+
+  .mast-brand {
+    color: var(--paper);
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+  }
+
+  .frame {
+    grid-template-columns: 1fr;
+  }
+
+  .rail {
+    display: none;
+    position: static;
+    height: auto;
+  }
+
+  .frame.is-rail-open .rail {
+    display: flex;
+  }
+
+  .sheet-inner {
+    width: min(calc(100% - 1.6rem), var(--sheet));
+  }
+
+  .index-list a {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+}
