@@ -1,6 +1,7 @@
 User-agent: *
-Disallow: /
+Allow: /
 
+Sitemap: https://zapovednytur.by/sitemap.xml
 User-agent: 01h4x.com
 Disallow: /
 User-agent: 360Spider
